@@ -1,36 +1,61 @@
 const express= require("express");
 const app =express();
-const bcrypt=require('bcrypt');
 const models= require('./models');
 const bodyParser= require("body-parser");
-const passport = require('passport')
-var Strategy = require('passport-local').Strategy;
-const session = require("express-session");
+const passport =require('passport')
 app.set('view engine','ejs');
-// var auth = require('./auth/index.js');
- 
+
+// const initializePassport =require ('./auth/index')
+
+
+
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
-// app.use('/auth',auth);
+app.get('/success', (req, res) => res.send("Welcome " + req.query.email + "!!"));
+app.get('/error', (req, res) => res.send("error logging in"));
+
+passport.serializeUser(function (user, cb) {
+  cb(null, user.id);
+});
+
+passport.deserializeUser(function (id, cb) {
+  models.users.findOne({ where: { id: id } }).then(function (user) {
+    cb(null, user);
+  });
+});
+
+const LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  function (email, password, done) {
+    models.users.findOne({
+      where: {
+        email: email
+      }
+    }).then(function (user) {
+      if (!user) {
+        return done(null, false);
+      }
+
+      if (user.password != password) {
+        return done(null, false);
+      }
+      return done(null, user);
+    }).catch(function (err) {
+      return done(err);
+    });
+  }
+));
+
 
 app.get('/',function(req,res){
   res.render('main.ejs')
-})
-
-
-
-
-
-
-app.get('/login',function(req,res){
-  res.render('login.ejs')
-})
-
-app.post("/login", function (req, res) {
-
-
 })
 
 
@@ -39,24 +64,36 @@ app.get('/sign-up',function(req,res){
   res.render('signup.ejs')
 })
 
-app.post("/sign-up",async function (req, res) {
+app.post("/sign-up", function (req, res) {
   
-  try{
-const hashePassword =await bcrypt.hash(req.body.password, 10)
-models.users.create({ firstName: req.body.firstName, lastName: req.body.lastName,email: req.body.email,password: hashePassword})
+  
+models.users.create({ firstName: req.body.firstName, lastName: req.body.lastName,email: req.body.email,password: req.body.password})
     .then(function (user) {
-    
-    });
-    res.redirect('/login')
-  }catch{
-    res.redirect('/sign-up')
-  }
-  
+      res.redirect("login")
+    })
+ 
 });
 
 
 
 
-app.listen(3000, function(){
+app.get('/login',function(req,res){
+  res.render('login.ejs')
+})
+
+app.post("/login",
+passport.authenticate('local', { failureRedirect: '/error' }),
+function(req, res) {
+  res.redirect('/success?username='+req.user.email);
+});
+ 
+
+  app.get('/profile',function(req,res){
+    res.render('profile.ejs')
+  })
+
+
+
+app.listen(3030, function(){
     console.log('server listening on port 3000');
   })
