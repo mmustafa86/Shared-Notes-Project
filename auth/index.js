@@ -1,18 +1,27 @@
-const express = require("express");
-const router = express.Router();
-//route paths are prepended with /auth
-router.get('/', function (req, res) {
-    res.json({
-        message: 'test'
-    });
-})
+// module.exports = function(app, passport) {
 
 
 
-router.post('/signup', function (req, res) {
-    res.json({
-        message: 'signup'
-    });
-})
+//     var passport = require('passport');
+//     var Strategy = require('passport-local').Strategy;
 
-module.exports = router;
+
+//     passport.use(new Strategy(
+//         function(username, password, cb) {
+//           db.users.findByUsername(username, function(err, user) {
+//             if (err) { return cb(err); }
+//             if (!user) { return cb(null, false); }
+//             if (user.password != password) { return cb(null, false); }
+//             return cb(null, user);
+//           });
+//         }));
+      
+
+
+
+
+
+
+
+
+// }
