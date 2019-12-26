@@ -13,8 +13,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/success', (req, res) => res.send("Welcome " + req.query.username + "!!"));
-app.get('/error', (req, res) => res.send("error logging in!!"));
+app.get('/success', (req, res) => res.redirect("profile"));
+app.get('/error', (req, res) => res.send("error"));
 
 
 passport.serializeUser(function (user, cb) {
@@ -26,6 +26,7 @@ passport.deserializeUser(function (id, cb) {
   });
 });
 
+// passport local authintcation 
 const LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(
@@ -48,9 +49,6 @@ passport.use(new LocalStrategy(
     });
   }
 ));
-
-
-
 
 app.get('/',function(req,res){
   res.render('main.ejs')
@@ -91,7 +89,6 @@ function(req, res) {
   app.get('/profile',function(req,res){
     res.render('profile.ejs')
   })
-
 
 
 app.listen(3030, function(){
