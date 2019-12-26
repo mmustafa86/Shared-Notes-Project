@@ -2,33 +2,59 @@
 <html>
 
 <head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <title>Node Authentication</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 
 </head>
 
 <body>
 
-        <html>
-                <body>
-                  <form action="/login" method="post">
-                    <div>
-                      <label for="username">UserName:</label>
-                      <input type="text" name="username" />
-                      <br/>
-                    </div>
-                    <div>
-                      <label for="password">Password:</label>
-                      <input type="password" name="password" />
-                    </div>
-                    <div>
-                      <input type="submit" value="Submit" />
-                    </div>
-                  </form>
-                </body>
-              </html>
+
+
+  <form action="/login" method="post" class="border border-light p-5">
+
+    <p class="h4 mb-4 text-center">Sign in</p>
+
+    <input name="username" name="username" id="defaultLoginFormEmail" class="form-control mb-4"
+      placeholder="E-mail">
+
+    <input for="password" name="password" type="password" id="defaultLoginFormPassword" class="form-control mb-4"
+      placeholder="Password">
+
+    <div class="d-flex justify-content-between">
+      <div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+          <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+        </div>
+      </div>
+      <div>
+        <a href="">Forgot password?</a>
+      </div>
+    </div>
+
+    <button class="btn btn-info btn-block my-4" type="submit" value="Submit">Sign in</button>
+
+    <div class="text-center">
+      <p>Not a member?
+        <a href="signup.ejs">Register</a>
+      </p>
+
+      <p>or sign in with:</p>
+      
+      </a>
+      <a type="button" class="light-blue-text mx-2">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </form>
+
+
+
+
+
 
 
 </body>

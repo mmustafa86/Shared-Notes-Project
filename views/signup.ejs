@@ -10,36 +10,53 @@
 </head>
 <body>
 
-        <h1>Register</h1>
-        <form action="/sign-up" method="POST">
-          <div>
-            <label for="firstname">Name</label>
-            <input type="text" id="name" name="firstname" required>
-          </div>
-          <div>
-                <label for="lastname">Last Name</label>
-                <input type="text" id="name" name="lastname" required>
-              </div>
-          <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-            <div>
-                    <label for="username">UserName:</label>
-                    <input type="text" name="username" />
-                    <br/>
-                  </div>
-          </div>
-          <div>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-          </div>
-          <button type="submit">Register</button>
-        </form>
-        <a href="/login">Login</a>
 
+<!-- Default form register -->
+<form action="/sign-up" method="POST" class="text-center border border-light p-5" >
 
-
-
+        <p class="h4 mb-4">Sign up</p>
+    
+        <div class="form-row mb-4">
+            <div class="col">
+                <!-- First name -->
+                <input for="firstname" name="firstname" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+            </div>
+            <div class="col">
+                <!-- Last name -->
+                <input type="text" for="lastname" name="lastname" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+            </div>
+        </div>
+    
+        <!-- E-mail -->
+        <input for="email" name="email"  type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail"required>
+     <!-- username -->
+        <input for="username" name="username" type="username" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="username" required>
+        <!-- Password -->
+        <input for="password" name="password" type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+        <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+            At least 8 characters and 1 digit
+        </small>
+    
+        
+    
+        <!-- Sign up button -->
+        <button class="btn btn-info my-4 btn-block" type="submit"> Register</button>
+    
+        <!-- Social register -->
+        <p>or sign up with:</p>
+    
+        <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
+        <a href="#" class="mx-2" role="button"><i class="fab fa-twitter light-blue-text"></i></a>
+        <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
+        <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
+    
+        <hr>
+     <!-- Default form register -->
+     <a href="/login">Login</a>
+   
+    
+    </form>
+   
 
 
 
