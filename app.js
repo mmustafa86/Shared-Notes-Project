@@ -5,50 +5,53 @@ const bodyParser= require("body-parser");
 const passport =require('passport')
 app.set('view engine','ejs');
 
-// const initializePassport =require ('./auth/index')
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+// var passports= require("./auth/index")
+// passports(passport)
+
+
+
 app.get('/success', (req, res) => res.redirect("profile"));
-app.get('/error', (req, res) => res.send("error"));
-
-
-passport.serializeUser(function (user, cb) {
-  cb(null, user.id);
-});
-passport.deserializeUser(function (id, cb) {
-  models.users.findOne({ where: { id: id } }).then(function (user) {
-    cb(null, user);
+  app.get('/error', (req, res) => res.send("error"));
+  
+  const LocalStrategy = require('passport-local').Strategy
+  passport.serializeUser(function (user, cb) {
+    cb(null, user.id);
   });
-});
-
-// passport local authintcation 
-const LocalStrategy = require('passport-local').Strategy;
-
-passport.use(new LocalStrategy(
-  function (username, password, done) {
-    models.users.findOne({
-      where: {
-        username: username
-      }
-    }).then(function (user) {
-      if (!user) {
-        return done(null, false);
-      }
-
-      if (user.password != password) {
-        return done(null, false);
-      }
-      return done(null, user);
-    }).catch(function (err) {
-      return done(err);
+  passport.deserializeUser(function (id, cb) {
+    models.users.findOne({ where: { id: id } }).then(function (user) {
+      cb(null, user);
     });
-  }
-));
+  });
+  
+  // passport local authintcation 
+
+  
+  passport.use(new LocalStrategy(
+    function (username, password, done) {
+      models.users.findOne({
+        where: {
+          username: username        }
+      }).then(function (user) {
+        if (!user) {
+          return done(null, false);
+        }
+  
+        if (user.password != password) {
+          return done(null, false);
+        }
+        return done(null, user);
+      }).catch(function (err) {
+        return done(err);
+      });
+    }
+  )); 
+
 
 app.get('/',function(req,res){
   res.render('main.ejs')
@@ -86,10 +89,15 @@ function(req, res) {
 });
  
 
-  app.get('/profile',function(req,res){
+  app.get('/profile',function(req,res,firstname){
+    
     res.render('profile.ejs')
-  })
-
+    })
+  
+  app.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/login");
+  });
 
 app.listen(3030, function(){
     console.log('server listening on port 3000');
