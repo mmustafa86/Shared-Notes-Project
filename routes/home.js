@@ -5,4 +5,10 @@ var router = express.Router();
 router.get('/',function(req,res){
     res.render('main.ejs')
   })
+  router.get('/sign-up',function(req,res){
+    res.render('signup.ejs')
+  })
+  router.get('/login',function(req,res){
+    res.render('login.ejs')
+  })
  module.exports = router;

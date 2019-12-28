@@ -14,7 +14,7 @@ app.use(passport.session());
 // var passports= require("./auth/index")
 // passports(passport)
 var home = require("./routes/home")
-var signUp= require("./routes/sign-up")
+// var signUp= require("./routes/sign-up")
 
 
 app.get('/success', (req, res) => res.redirect("/profile"));
@@ -55,8 +55,9 @@ app.get('/success', (req, res) => res.redirect("/profile"));
 
 
 
-app.use('/',home)
-app.use('/sign-up',signUp)
+app.use('/',home);
+app.use('/sign-up',home);
+app.use('/login',home);
 
 
 app.post("/sign-up", function (req, res) {
@@ -74,10 +75,6 @@ models.users.create({
     })
  
 });
-
-app.get('/login',function(req,res){
-  res.render('login.ejs')
-})
 
 app.post('/login',
 passport.authenticate('local', { failureRedirect: '/error' }),
