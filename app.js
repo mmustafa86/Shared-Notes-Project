@@ -13,7 +13,8 @@ app.use(passport.session());
 
 // var passports= require("./auth/index")
 // passports(passport)
-
+var home = require("./routes/home")
+var signUp= require("./routes/sign-up")
 
 
 app.get('/success', (req, res) => res.redirect("/profile"));
@@ -53,15 +54,10 @@ app.get('/success', (req, res) => res.redirect("/profile"));
   )); 
 
 
-app.get('/',function(req,res){
-  res.render('main.ejs')
-})
- 
 
+app.use('/',home)
+app.use('/sign-up',signUp)
 
-app.get('/sign-up',function(req,res){
-  res.render('signup.ejs')
-})
 
 app.post("/sign-up", function (req, res) {
   
@@ -90,20 +86,20 @@ function(req, res) {
 });
  
 
-  app.get('/profile/:usrename',function(req,res){
-  models.users.findOne({ where: { username: req.param.username } })
-  .then(function (user) {
-    
-    console.log(user)
-    res.render("profile.ejs",{users: user})
+  app.get('/profile',function(req,res){
+   var finds= function(id){
+    models.users.findAll({ where: { id: id } })
+    .then(function (reuslt) {
+      
+      console.log(reuslt)
+      
+    });
+    return finds;
+  
+   } 
+  
+   res.render("profile.ejs",{users:finds})
   });
-  
-   
-  });
-
-    
-  
-  
   app.get("/logout", function(req, res){
     req.logout();
     res.redirect("/login");
