@@ -16,7 +16,7 @@ app.use(passport.session());
 
 
 
-app.get('/success', (req, res) => res.redirect("profile"));
+app.get('/success', (req, res) => res.redirect("/profile"));
   app.get('/error', (req, res) => res.send("error"));
   
   const LocalStrategy = require('passport-local').Strategy
@@ -73,6 +73,7 @@ models.users.create({
    email:req.body.email
   })
     .then(function (user) {
+      console.log(user);
       res.redirect("login")
     })
  
@@ -89,10 +90,19 @@ function(req, res) {
 });
  
 
-  app.get('/profile',function(req,res,firstname){
+  app.get('/profile/:usrename',function(req,res){
+  models.users.findOne({ where: { username: req.param.username } })
+  .then(function (user) {
     
-    res.render('profile.ejs')
-    })
+    console.log(user)
+    res.render("profile.ejs",{users: user})
+  });
+  
+   
+  });
+
+    
+  
   
   app.get("/logout", function(req, res){
     req.logout();
