@@ -3,25 +3,30 @@ const app =express();
 const models= require('./models');
 const bodyParser= require("body-parser");
 const passport =require('passport')
+const session = require('express-session')
+const LocalStrategy = require('passport-local').Strategy
+
 app.set('view engine','ejs');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session({seecert: 'account'}));
 
 // var passports= require("./auth/index")
 // passports(passport)
 var home = require("./routes/home")
 
-const LocalStrategy = require('passport-local').Strategy
-  passport.serializeUser(function (user, cb) {
-    cb(null, user.id);
+
+
+
+  passport.serializeUser(function (user, done) {
+    done(null, user.id);
   });
-  passport.deserializeUser(function (id, cb) {
+  passport.deserializeUser(function (id, done) {
     models.users.findOne({ where: { id: id } }).then(function (user) {
-      cb(null, user);
+      done(null, user);
     });
   });
   
@@ -47,13 +52,15 @@ const LocalStrategy = require('passport-local').Strategy
       });
     }
   )); 
-
+//router 
 app.use('/',home);
 app.use('/sign-up',home);
 app.use('/login',home);
 app.use('/success',home);
 app.use('/error',home)
 
+
+//user sign-up
 app.post("/sign-up", function (req, res) {
   
 models.users.create({ 
@@ -69,7 +76,7 @@ models.users.create({
     })
  
 });
-
+//user login 
 app.post('/login',
 passport.authenticate('local', { failureRedirect: '/error' }),
 function(req, res) {
