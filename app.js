@@ -14,13 +14,8 @@ app.use(passport.session());
 // var passports= require("./auth/index")
 // passports(passport)
 var home = require("./routes/home")
-// var signUp= require("./routes/sign-up")
 
-
-app.get('/success', (req, res) => res.redirect("/profile"));
-  app.get('/error', (req, res) => res.send("error"));
-  
-  const LocalStrategy = require('passport-local').Strategy
+const LocalStrategy = require('passport-local').Strategy
   passport.serializeUser(function (user, cb) {
     cb(null, user.id);
   });
@@ -53,12 +48,11 @@ app.get('/success', (req, res) => res.redirect("/profile"));
     }
   )); 
 
-
-
 app.use('/',home);
 app.use('/sign-up',home);
 app.use('/login',home);
-
+app.use('/success',home);
+app.use('/error',home)
 
 app.post("/sign-up", function (req, res) {
   

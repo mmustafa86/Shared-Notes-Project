@@ -11,4 +11,10 @@ router.get('/',function(req,res){
   router.get('/login',function(req,res){
     res.render('login.ejs')
   })
+
+
+
+
+router.get('/success', (req, res) => res.redirect("/profile"));
+router.get('/error', (req, res) => res.send("error"));
  module.exports = router;
