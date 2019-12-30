@@ -47,18 +47,31 @@ passport.authenticate('local', { failureRedirect: '/error' }),
 function(req, res) {
   res.redirect('/success?username='+req.user.username);
 });
+
+
+
 router.post("/sign-up", function (req, res) {
-    models.users.create({ 
-    firstname: req.body.firstname,
-     lastname: req.body.lastname,
-     username: req.body.username,
-     password: req.body.password,
-     email:req.body.email
-    }).then(function (user) {
-        console.log(user);
-        res.redirect("login")
-      })
+    models.users.findOne({
+    where: {
+      username: req.body.username
+    }}).then(function(user){
+      console.log(user)
+      if(!user){
+        models.users.create({ 
+          firstname: req.body.firstname,
+           lastname: req.body.lastname,
+           username: req.body.username,
+           password: req.body.password,
+           email: req.body.email
+      }).error(function(err){
+        console.log(err);
+      });
+      } else {
+      res.redirect('sign-up')
+      }
     })
+    res.redirect('login')
+    });
 
 
 
