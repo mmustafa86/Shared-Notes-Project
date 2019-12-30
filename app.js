@@ -4,17 +4,26 @@ const models= require('./models');
 const bodyParser= require("body-parser");
 const passport =require('passport');
 const session = require('express-session');
-
+var cookieParser = require('cookie-parser');
+var morgan = require('morgan');
 app.set('view engine','ejs');
-
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(passport.initialize());
-app.use(passport.session({secert: 'account'}));
+app.use(passport.session({key: 'username',secert: 'account' ,resave: false,
+saveUninitialized: false,cookie: {
+  expires: 600000
+}}));
+
 var home = require("./routes/home");
 var passports = require('./auth/local');
 // var auth = require('./routes/googleauth')
+
+
+
+
 
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 

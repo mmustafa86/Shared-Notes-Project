@@ -27,10 +27,11 @@ passport.serializeUser(function (user, done) {
           username: username        }
       }).then(function (user) {
         if (!user) {
-          return done(null, false);
+        
         }
   
         if (user.password != password) {
+          
           return done(null, false);
         }
         return done(null, user);
