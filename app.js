@@ -47,15 +47,15 @@ passport.use(new GoogleStrategy({
 //router 
 app.use('/',home);
 app.use('/sign-up',home);
-app.use('/ogin',home);
-app.use('/success',home);
-app.use('/error',home)
+app.use('/login',home);
+app.use('/success',passports);
+app.use('/error',passports)
 app.use('/logout',home)
 app.use('/sign-up',home)
 // app.use('/auth/google', auth);
-app.use(passports);
+app.use('/profile',passports);
 
-
+app.use(passports)
 
 
 app.get('/auth/google/callback', 
@@ -70,20 +70,6 @@ app.get('/auth/google',
 
 
 //user sign-up
-
-
-
-  app.get('/profile', function(req,res){
-    // models.users.findOne({ 
-    //   where: { 
-    //     firstname: req.body.firstname } 
-    //   }).then(function (result) {
-    //   console.log(result)
-      res.render("profile.ejs")
-    // }).error(function(err){
-    //   console.log(err);
-    // });
-  })
 
   models.sequelize.sync().then(function(){
     app.listen(3030, function(){

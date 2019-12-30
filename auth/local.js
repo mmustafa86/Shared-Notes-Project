@@ -41,13 +41,30 @@ passport.serializeUser(function (user, done) {
     }
   )); 
 
-
-
 router.post('/login',
 passport.authenticate('local', { failureRedirect: '/error' }),
 function(req, res) {
-  res.redirect('/success?username='+req.user.username);
+  res.redirect('/success?username='+req.user.firstname)
+  var  firstname =req.user.firstname
+  var lastname= req.user.lastname
+console.log(firstname+lastname);
+  router.get('/profile', function(req,res){
+  
+    res.render("profile.ejs",{data :firstname ,data2: lastname})
+  // }).error(function(err){
+  //   console.log(err);
+  // });
+})
+
 });
+
+router.get('/success', function (req, res) {
+  res.redirect("/profile");
+} );
+router.get('/error', function(req, res) {
+  res.redirect("/login");
+} )
+
 
 router.post("/sign-up", function (req, res) {
     models.users.findOne({
