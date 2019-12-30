@@ -48,8 +48,6 @@ function(req, res) {
   res.redirect('/success?username='+req.user.username);
 });
 
-
-
 router.post("/sign-up", function (req, res) {
     models.users.findOne({
     where: {
@@ -72,7 +70,6 @@ router.post("/sign-up", function (req, res) {
     })
     res.redirect('login')
     });
-
 
 
 module.exports = router;

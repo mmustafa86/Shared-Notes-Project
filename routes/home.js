@@ -18,6 +18,6 @@ router.get('/',function(req,res){
   });
  
   router.get('/success', (req, res) => res.redirect("/profile"));
-  router.get('/error', (req, res) => res.send("error"));
+  router.get('/error', (req, res) => res.redirect("/login"));
   
  module.exports = router;

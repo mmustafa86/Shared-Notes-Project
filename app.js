@@ -38,7 +38,7 @@ passport.use(new GoogleStrategy({
 //router 
 app.use('/',home);
 app.use('/sign-up',home);
-app.use('/login',home);
+app.use('/ogin',home);
 app.use('/success',home);
 app.use('/error',home)
 app.use('/logout',home)
@@ -62,22 +62,22 @@ app.get('/auth/google',
 
 //user sign-up
 
- 
 
-  app.get('/profile',function(req,res){
-   var finds= function(id){
-    models.users.findAll({ where: { id: id } })
-    .then(function (reuslt) {
-      
-      console.log(reuslt)
-      
-    });
-    return finds;
-  
-   } 
-   res.render("profile.ejs",{users:finds})
+
+  app.get('/profile', function(req,res){
+    // models.users.findOne({ 
+    //   where: { 
+    //     firstname: req.body.firstname } 
+    //   }).then(function (result) {
+    //   console.log(result)
+      res.render("profile.ejs")
+    // }).error(function(err){
+    //   console.log(err);
+    // });
+  })
+
+  models.sequelize.sync().then(function(){
+    app.listen(3030, function(){
+      console.log('server listening on port 3000');
   });
-
-app.listen(3030, function(){
-    console.log('server listening on port 3000');
-});
+  })
