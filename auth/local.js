@@ -1,5 +1,7 @@
 const express= require("express");
 const app =express();
+const session = require('express-session');
+var cookieParser = require('cookie-parser');
 var router = express.Router();
 const passport =require('passport')
 const models= require('/Users/mohammedmustafa/Desktop/backend project/models');
@@ -53,10 +55,11 @@ console.log(firstname+lastname);
     res.render("profile.ejs",{data :firstname ,data2: lastname})
   // }).error(function(err){
   //   console.log(err);
-  // });
+  // })
+});
 })
 
-});
+
 
 router.get('/success', function (req, res) {
   res.redirect("/profile");
@@ -86,8 +89,8 @@ router.post("/sign-up", function (req, res) {
       res.redirect('sign-up')
       }
     })
-    res.redirect('login')
+    res.redirect('/login')
     });
 
 
-module.exports = router;
+module.exports = router

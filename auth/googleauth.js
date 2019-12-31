@@ -9,6 +9,16 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var GOOGLE_CLIENT_ID ="382234308177-5gnbp943g9h6847g5ejh4bcjcklv0uue.apps.googleusercontent.com";
 var GOOGLE_CLIENT_SECRET="Ske7uzCJFY0gD5TRlic4YtjG"
 
+
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+passport.deserializeUser(function (id, done) {
+  models.users.findOne({ where: { id: id } }).then(function (user) {
+    done(null, user);
+  }); 
+});
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
@@ -21,6 +31,9 @@ passport.use(new GoogleStrategy({
     // });
   }
   ));
+
+
+
   router.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {

@@ -20,6 +20,7 @@
     "express-session": "^1.17.0",
     "morgan": "^1.9.1",
     "nodeman": "^1.1.2",
+    "nodemon": "^2.0.2",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
     "passport-google-oauth20": "^2.0.0",
