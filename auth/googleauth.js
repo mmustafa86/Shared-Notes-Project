@@ -15,7 +15,7 @@ passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 passport.deserializeUser(function (id, done) {
-  models.users.findOne({ where: { id: id } }).then(function (user) {
+  models.google.findOne({ where: { id: id } }).then(function (user) {
     done(null, user);
   }); 
 });
@@ -30,6 +30,7 @@ passport.use(new GoogleStrategy({
       where: {
       googleId: profile.id 
     }})
+    console.log(profile);
       return done(null, profile);
     // });
   }
@@ -40,15 +41,16 @@ passport.use(new GoogleStrategy({
   router.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
+    console.log(req.params);
     res.redirect('/profile');
   });
 
   router.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
-  router.get('/profile', function(req,res){
+  // router.get('/profile', function(req,res){
   
-    res.render("profile.ejs")
+  //   res.render("profile.ejs",{data :res.id , data2 :res.name})
 
-})
+// })
 module.exports = router;
