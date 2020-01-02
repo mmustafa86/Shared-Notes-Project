@@ -2,13 +2,13 @@ const express= require("express");
 const app =express();
 var router = express.Router();
 const passport =require('passport')
+
 app.use(passport.initialize());
 const models= require('/Users/mohammedmustafa/Desktop/backend project/models');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var GOOGLE_CLIENT_ID ="382234308177-5gnbp943g9h6847g5ejh4bcjcklv0uue.apps.googleusercontent.com";
 var GOOGLE_CLIENT_SECRET="Ske7uzCJFY0gD5TRlic4YtjG"
-
 
 
 passport.serializeUser(function (user, done) {
@@ -36,13 +36,15 @@ passport.use(new GoogleStrategy({
   }
   ));
 
-
-
+  // router.get('/profile', function(req,res){
+  
+  //   res.render("profile.ejs")
+  // })
   router.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     console.log(req.params);
-    res.redirect('/profile');
+    res.render('profile');
   });
 
   router.get('/auth/google',

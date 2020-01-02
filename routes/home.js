@@ -13,7 +13,7 @@ router.get('/',function(req,res){
     res.render('login.ejs')
   })
   router.get('/error',function(req,res){
-    res.render('error.ejs')
+    res.render('error.ejs',{error: 'password incorrect '})
   })
 
   router.get("/logout", function(req, res){
