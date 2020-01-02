@@ -82,14 +82,17 @@ router.post("/sign-up", function (req, res) {
            username: req.body.username,
            password: req.body.password,
            email: req.body.email
+  
       }).error(function(err){
         console.log(err);
+       
       });
       } else {
-      res.redirect('sign-up')
+      res.render('signup', {error: 'The user is already created '})
       }
+      res.redirect("login")
     })
-    res.redirect('/login')
+    
     });
 
 

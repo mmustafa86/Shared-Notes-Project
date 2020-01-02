@@ -12,6 +12,9 @@ router.get('/',function(req,res){
   router.get('/login',function(req,res){
     res.render('login.ejs')
   })
+  router.get('/error',function(req,res){
+    res.render('error.ejs')
+  })
 
   router.get("/logout", function(req, res){
     req.logout();
