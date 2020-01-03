@@ -3,6 +3,8 @@ var router = express.Router();
 const session = require('express-session');
 const models= require('/Users/mohammedmustafa/Desktop/backend project/models');
 /* GET home page. */
+
+
 router.get('/',function(req,res){
     res.render('main.ejs')
   })
@@ -17,11 +19,10 @@ router.get('/',function(req,res){
   })
 
   router.get("/logout", function(req, res){
-    req.logout();
-    // req.session.destroy();
-    
-    res.redirect("/");
-    // res.end();
+   
+    req.session.destroy();
+    res.redirect("/")
+    // req.end();
   });
 
   // router.get('/logout', function(req, res) {

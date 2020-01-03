@@ -9,15 +9,20 @@ var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 app.set('view engine','ejs');
 app.use(morgan('dev'));
+
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(passport.initialize());
 
-app.use(passport.session({key: 'username',secert: 'account' ,resave: false,
-saveUninitialized: false,cookie: {
-  expires: 600000
-}}));
+// app.use(passport.session({key: 'username',secert: 'account' ,resave: false,
+// saveUninitialized: false,cookie: {
+//   expires: 600000
+// }}));
+
+app.use(session({secret: 'anything'}));
 
 var home = require("./routes/home");
 var passports = require('./auth/local');
@@ -36,6 +41,7 @@ app.use(home);
 // app.use('/profile',passports);
 app.use(google)
 app.use(passports)
+
 
 
   models.sequelize.sync().then(function(){

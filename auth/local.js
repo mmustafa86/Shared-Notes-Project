@@ -1,10 +1,25 @@
 const express= require("express");
 const app =express();
 const session = require('express-session');
-var cookieParser = require('cookie-parser');
+
+// var cookieParser = require('cookie-parser');
 var router = express.Router();
 const passport =require('passport')
+var pbkdf2 = require('pbkdf2');
+var salt = "4213426A433E1F9C29368F36F44F1";
+
 const models= require('/Users/mohammedmustafa/Desktop/backend project/models');
+
+
+function encryptionPassword(password){
+  var key =pbkdf2.pbkdf2Sync(
+    password,salt, 36000,256, 'sha256'
+  );
+  var hash= key.toString('hex')
+  return hash;
+}
+
+
 
 const LocalStrategy = require('passport-local').Strategy
 
@@ -32,7 +47,7 @@ passport.serializeUser(function (user, done) {
         
         }
   
-        if (user.password != password) {
+        if (user.password != encryptionPassword(password)) {
           
           return done(null, false);
         }
@@ -80,7 +95,7 @@ router.post("/sign-up", function (req, res) {
           firstname: req.body.firstname,
            lastname: req.body.lastname,
            username: req.body.username,
-           password: req.body.password,
+           password: encryptionPassword(req.body.password),
            email: req.body.email
   
       }).error(function(err){
