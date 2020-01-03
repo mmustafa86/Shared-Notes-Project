@@ -17,10 +17,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(passport.initialize());
 
-// app.use(passport.session({key: 'username',secert: 'account' ,resave: false,
-// saveUninitialized: false,cookie: {
-//   expires: 600000
-// }}));
+app.use(passport.session({key: 'username',secert: 'account' ,resave: false,
+saveUninitialized: false,cookie: {
+  expires: 600000
+}}));
 
 app.use(session({secret: 'anything'}));
 
