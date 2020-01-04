@@ -1,15 +1,22 @@
-const express= require("express");
-const app =express();
-
-// var cookieParser = require('cookie-parser');
+var express = require('express');
+const app = express();
+const session = require('express-session');
+const passport =require('passport');
 var router = express.Router();
-const passport =require('passport')
-var pbkdf2 = require('pbkdf2');
-var salt = "4213426A433E1F9C29368F36F44F1";
-
 const models= require('../models');
+
+app.use(session({
+  secret: "cats", 
+  resave: false, 
+  saveUninitialized: true
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+// var cookieParser = require('cookie-parser');
+var pbkdf2 = require('pbkdf2');
+var salt = "4213426A433E1F9C29368F36F44F1";
 
 
 function encryptionPassword(password){
@@ -23,10 +30,6 @@ function encryptionPassword(password){
 
 
 const LocalStrategy = require('passport-local').Strategy
-
-
-
-
 
   // Register User
   router.post("/sign-up", function (req, res) {
@@ -132,6 +135,7 @@ router.get('/error', function(req, res) {
 
 router.get('/profile',function(req,res){
   console.log(req.session);
+  console.log(req.user);
   res.render("profile.ejs",{data :req.user ,data2: req.user })
 // }).error(function(err){
 //   console.log(err);

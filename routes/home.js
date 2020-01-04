@@ -1,7 +1,18 @@
 var express = require('express');
+const app = express();
+const session = require('express-session');
+const passport =require('passport');
 var router = express.Router();
 
-const models= require('/Users/mohammedmustafa/Desktop/backend project/models');
+
+app.use(session({
+  secret: "cats", 
+  resave: false, 
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 /* GET home page. */
 
 

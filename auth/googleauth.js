@@ -1,10 +1,19 @@
-const express= require("express");
-const app =express();
+var express = require('express');
+const app = express();
+const session = require('express-session');
+const passport =require('passport');
 var router = express.Router();
-const passport =require('passport')
+const models= require('../models');
+
+
+app.use(session({
+  secret: "cats", 
+  resave: false, 
+  saveUninitialized: true
+}));
 
 app.use(passport.initialize());
-const models= require('/Users/mohammedmustafa/Desktop/backend project/models');
+app.use(passport.session());
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var GOOGLE_CLIENT_ID ="382234308177-5gnbp943g9h6847g5ejh4bcjcklv0uue.apps.googleusercontent.com";
