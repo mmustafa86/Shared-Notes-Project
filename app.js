@@ -7,6 +7,7 @@ const session = require('express-session');
 const http = require('http');
 var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
+require('dotenv').config();
 app.set('view engine','ejs');
 app.use(morgan('dev'));
 
@@ -35,7 +36,7 @@ app.use(passports)
 
 
   models.sequelize.sync().then(function(){
-    app.listen(3050, function(){
+    app.listen(process.env.PORT, function(){
       console.log('server listening on port 3000');
   });
   })

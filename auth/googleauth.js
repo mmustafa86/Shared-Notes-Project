@@ -52,8 +52,8 @@ passport.use(new GoogleStrategy({
   router.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log(req.params);
-    res.render('profile');
+    console.log(req);
+    res.redirect('/profile');
   });
 
   router.get('/auth/google',
@@ -61,7 +61,7 @@ passport.use(new GoogleStrategy({
 
   // router.get('/profile', function(req,res){
   
-  //   res.render("profile.ejs",{data :res.id , data2 :res.name})
+  //   res.render("profile.ejs")
 
 // })
 module.exports = router;

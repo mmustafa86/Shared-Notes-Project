@@ -122,22 +122,23 @@ router.get('/success', function (req, res) {
     res.redirect("/profile");
 
   }else {
-    res.send('not athorize')
+    res.redirect('/sign-up')
   }
 } );
 
 router.get('/error', function(req, res) {
+  
   res.redirect("/login");
 } )
 
 
 router.get('/profile',function(req,res){
-  console.log(req.session);
+  if(req.isAuthenticated()){
   console.log(req.user);
   res.render("profile.ejs",{data :req.user ,data2: req.user })
-// }).error(function(err){
-//   console.log(err);
-// })
+  }else {
+    res.redirect('/sign-up')
+  }
 
 
 });
