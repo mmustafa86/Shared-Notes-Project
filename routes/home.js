@@ -18,12 +18,16 @@ app.use(passport.session());
 
 
 router.get('/',function(req,res){
-console.log(req.body.fullname);
+
 models.post.findAll().then(function(user){
      console.log(user);
+     user.forEach(element => {
+       console.log(element.fullname + element.subject)
+     });
+     res.render('main.ejs',{names: user})
    })
+
   
-  res.render('main.ejs')
   })
 
 

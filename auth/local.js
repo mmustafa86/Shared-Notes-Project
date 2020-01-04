@@ -113,10 +113,8 @@ blog: req.body.blog
   }).then(function(user){
     console.log(user)
   })
-  res.render('profile.ejs',{data :req.user.firstname ,data2: req.user.lastname })
+  res.redirect('profile')
 })
-
-
 
 router.get('/success', function (req, res) {
   console.log(req.user)
@@ -147,8 +145,6 @@ router.get('/profile',function(req,res){
 
 router.get('/logout', function(req, res) {
   req.logout();
- 
-  
   res.redirect('/');
 });
 
