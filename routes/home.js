@@ -3,6 +3,7 @@ const app = express();
 const session = require('express-session');
 const passport =require('passport');
 var router = express.Router();
+const models= require('../models');
 
 
 app.use(session({
@@ -17,8 +18,15 @@ app.use(passport.session());
 
 
 router.get('/',function(req,res){
-    res.render('main.ejs')
+console.log(req.body.fullname);
+models.post.findAll().then(function(user){
+     console.log(user);
+   })
+  
+  res.render('main.ejs')
   })
+
+
   router.get('/sign-up',function(req,res){
     res.render('signup.ejs')
   })

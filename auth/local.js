@@ -105,7 +105,7 @@ function(req, res) {
 
 router.post('/profile',function(req,res){
   models.post.create({
-user_id: userId,
+user_id: req.user.id,
 fullname: req.body.fullname,
 subject: req.body.subject,
 blog: req.body.blog
@@ -147,7 +147,7 @@ router.get('/profile',function(req,res){
 
 router.get('/logout', function(req, res) {
   req.logout();
-  // req.session.destroy()
+ 
   
   res.redirect('/');
 });
