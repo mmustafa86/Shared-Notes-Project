@@ -31,6 +31,7 @@
     "pbkdf2": "^3.0.17",
     "pg": "^7.15.1",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.3"
+    "sequelize": "^5.21.3",
+    "sequelize-cli": "^5.5.1"
   }
 }
