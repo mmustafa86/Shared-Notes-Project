@@ -1,6 +1,5 @@
 const express= require("express");
 const app =express();
-// const session = require('express-session');
 
 // var cookieParser = require('cookie-parser');
 var router = express.Router();
@@ -8,7 +7,9 @@ const passport =require('passport')
 var pbkdf2 = require('pbkdf2');
 var salt = "4213426A433E1F9C29368F36F44F1";
 
-const models= require('/Users/mohammedmustafa/Desktop/backend project/models');
+const models= require('../models');
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 function encryptionPassword(password){
@@ -23,85 +24,12 @@ function encryptionPassword(password){
 
 const LocalStrategy = require('passport-local').Strategy
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(function(req,res,next){
-  res.locals.isAuthenticated = req.isAuthenticated();
-  next();
-});
-
-passport.serializeUser(function (user, done) {
-    done(null, user.id);
-  });
-  passport.deserializeUser(function (id, done) {
-    models.users.findOne({ where: { id: id } }).then(function (user) {
-      done(null, user);
-    }); 
-  });
 
 
-  passport.use(new LocalStrategy(
-    function (username, password, done) {
-      models.users.findOne({
-        where: {
-          username: username        }
-      }).then(function (user) {
-        if (!user) {
-        
-        }
-  
-        if (user.password != encryptionPassword(password)) {
-          
-          return done(null, false);
-        }
-        return done(null, user);
-      }).catch(function (err) {
-        return done(err);
-      });
-    }
-  )); 
-
-router.post('/login',
-passport.authenticate('local', { failureRedirect: '/error' }),
-function(req, res) {
-  res.redirect('/success?username='+req.user.firstname)
-  var userId =req.user.id
-  var  firstname =req.user.firstname
-  var lastname= req.user.lastname
-console.log(firstname+lastname);
-  router.get('/profile', function(req,res){
-  
-    res.render("profile.ejs",{data :firstname ,data2: lastname ,id: userId})
-  // }).error(function(err){
-  //   console.log(err);
-  // })
-  router.post('/profile',function(req,res){
-    models.post.create({
-  user_id: userId,
-  fullname: req.body.fullname,
-  subject: req.body.subject,
-  blog: req.body.blog
-  
-    }).then(function(user){
-      console.log(user)
-    })
-    res.render('profile.ejs',{data :firstname ,data2: lastname ,id: userId})
-  })
-  
-});
-})
 
 
-router.get('/success', function (req, res) {
-  res.redirect("/profile");
-} );
-router.get('/error', function(req, res) {
-  res.redirect("/login");
-} )
-
-
-router.post("/sign-up", function (req, res) {
+  // Register User
+  router.post("/sign-up", function (req, res) {
     models.users.findOne({
     where: {
       username: req.body.username
@@ -127,13 +55,98 @@ router.post("/sign-up", function (req, res) {
     
     });
 
+//passport local strategy 
 
-  // router.get("/logout", function(req, res){
-  //   req.logout()
-    
-  //    res.redirect("/login")
-  //    // req.end();
-  //  });
+
+  passport.use(new LocalStrategy(
+    function (username, password, done) {
+      models.users.findOne({
+        where: {
+          username: username        }
+      }).then(function (user) {
+        if (!user) {
+        return done(null,false)
+        }
+  
+        if (user.password != encryptionPassword(password)) {
+          
+          return done(null, false);
+        }
+        return done(null, user);
+      }).catch(function (err) {
+        return done(err);
+      });
+    }
+  )); 
+
+  passport.serializeUser(function (user, done) {
+    done(null, user.id);
+  });
+  passport.deserializeUser(function (id, done) {
+    models.users.findOne({ where: { id: id } }).then(function (user) {
+      done(null, user);
+    }); 
+  });
+
+// Using LocalStrategy with passport
+router.post('/login',
+passport.authenticate('local', { failureRedirect: '/error' }),
+function(req, res) {
+  res.redirect('/success?username='+req.user.firstname)
+
+// console.log(firstname+lastname);
+  // router.redirect('/profile')
+})
+
+
+
+router.post('/profile',function(req,res){
+  models.post.create({
+user_id: userId,
+fullname: req.body.fullname,
+subject: req.body.subject,
+blog: req.body.blog
+
+  }).then(function(user){
+    console.log(user)
+  })
+  res.render('profile.ejs',{data :req.user.firstname ,data2: req.user.lastname })
+})
+
+
+
+router.get('/success', function (req, res) {
+  console.log(req.user)
+  if(req.isAuthenticated()){
+    res.redirect("/profile");
+
+  }else {
+    res.send('not athorize')
+  }
+} );
+
+router.get('/error', function(req, res) {
+  res.redirect("/login");
+} )
+
+
+router.get('/profile',function(req,res){
+  console.log(req.session);
+  res.render("profile.ejs",{data :req.user ,data2: req.user })
+// }).error(function(err){
+//   console.log(err);
+// })
+
+
+});
+
+
+router.get('/logout', function(req, res) {
+  req.logout();
+  // req.session.destroy()
+  
+  res.redirect('/');
+});
 
 
 module.exports = router
