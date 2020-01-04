@@ -37,6 +37,7 @@
 
 
 <h1>Welcome </h1>
+
 <h1><%=data%> <%=data2%></h1>
 
 <!-- Purple Header -->
@@ -53,34 +54,31 @@
         <p class="pb-4">Example of Material Design Form</p>
 
         <!--Body-->
-        <form action="#">
-
+        <form ction="/profile" method="post">
+          <!-- <input hidden for='user_id' name='user_id' type="text" id="form1" class="form-control"> -->
           <h5 class="h5-responsive">Full Name </h5>
           <!-- Basic textbox -->
           <div class="md-form">
-            <input type="text" id="form1" class="form-control">
-            <label for="form1" class="">Example label</label>
+            <input for='fullname' name='fullname'type="text" id="form1" class="form-control">
+            <label  class=""></label>
           </div>
-          <!-- /.Basic textbox -->
-
-       
-          <!--Email validation-->
+  
+          <!--Subject-->
           <h5 class="h5-responsive">Subject</h5>
           <div class="md-form">
-            <i class="fas fa-envelope prefix"></i>
-            <input type="email" id="form9" class="form-control validate">
-            <label for="form9" data-error="wrong" data-success="right">Your email</label>
+            <!-- <i class="fas fa-envelope prefix"></i> -->
+            <input for="subject" name="subject" type="text" id="form9" class="form-control validate">
+            <!-- <label for="form9" data-error="wrong" data-success="right">Your email</label> -->
           </div>
 
           <!--Textarea with icon-->
           <h5 class="h5-responsive">Blog Area</h5>
           <div class="md-form">
             <i class="fas fa-pencil-alt prefix"></i>
-            <textarea type="text" id="form7" class="md-textarea form-control" rows="4"></textarea>
-            <label for="form7">Textarea</label>
+            <textarea for="blog" name="blog" type="text" id="form7" class="md-textarea form-control" rows="4"></textarea>
+            <!-- <label for="form7">Textarea</label> -->
           </div>
 
-  
           <div class="text-xs-left">
             <button class="btn btn-primary">Post</button>
           </div>

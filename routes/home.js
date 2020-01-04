@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const session = require('express-session');
+
 const models= require('/Users/mohammedmustafa/Desktop/backend project/models');
 /* GET home page. */
 
@@ -18,25 +18,7 @@ router.get('/',function(req,res){
     res.render('error.ejs',{error: 'password incorrect '})
   })
 
-  router.get("/logout", function(req, res){
-   
-    req.session.destroy();
-    res.redirect("/")
-    // req.end();
-  });
 
-  // router.get('/logout', function(req, res) {
-  //   req.session.destroy(function(err){
-  //      if(err){
-  //         console.log(err);
-  //      }else{
-  //          console.log(session);
-  //          req.end();
-  //          res.redirect('/signup');
-  //      }
-  //   });
-  
-  // );}
 
 
  

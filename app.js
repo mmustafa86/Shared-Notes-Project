@@ -13,16 +13,20 @@ app.use(morgan('dev'));
 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
 app.use(passport.initialize());
 
-app.use(passport.session({key: 'username',secert: 'account' ,resave: false,
-saveUninitialized: false,cookie: {
-  expires: 600000
-}}));
+// app.use(passport.session({key: 'username',secert: 'account' ,resave: false,
+// saveUninitialized: false,cookie: {
+//   expires: 600000
+// }}));
 
-app.use(session({secret: 'anything'}));
+app.use(session({
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true
+}));
 
 var home = require("./routes/home");
 var passports = require('./auth/local');
@@ -30,22 +34,33 @@ var google= require('./auth/googleauth');
 
 //routers
 app.use(home);
-// app.use('/sign-up',home);
-// app.use('/login',home);
-// app.use('/success',passports);
-// app.use('/error',passports)
-// app.use('/logout',home)
-// app.use('/sign-up',home)
-// app.use('/auth/google', google);
-// app.use('/auth/google/callback',google);
-// app.use('/profile',passports);
+
 app.use(google)
 app.use(passports)
 
+// app.post('/profile',function(req,res){
+//   models.post.create({
+// user_id: req.body.user_id,
+// fullname: req.body.fullname,
+// subject: req.body.subject,
+// blog: req.body.blog
+
+//   }).then(function(user){
+//     console.log(user)
+//   })
+//   res.render('profile.ejs')
+// })
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  // req.session.destroy()
+  
+  res.redirect('/');
+});
 
 
-  models.sequelize.sync().then(function(){
-    app.listen(3040, function(){
+  // models.sequelize.sync().then(function(){
+    app.listen(3050, function(){
       console.log('server listening on port 3000');
-  });
+  // });
   })

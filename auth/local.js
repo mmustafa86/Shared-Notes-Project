@@ -1,6 +1,6 @@
 const express= require("express");
 const app =express();
-const session = require('express-session');
+// const session = require('express-session');
 
 // var cookieParser = require('cookie-parser');
 var router = express.Router();
@@ -24,8 +24,12 @@ function encryptionPassword(password){
 const LocalStrategy = require('passport-local').Strategy
 
 app.use(passport.initialize());
-app.use(passport.session({secert: 'account'}));
+app.use(passport.session());
 
+app.use(function(req,res,next){
+  res.locals.isAuthenticated = req.isAuthenticated();
+  next();
+});
 
 passport.serializeUser(function (user, done) {
     done(null, user.id);
@@ -62,18 +66,31 @@ router.post('/login',
 passport.authenticate('local', { failureRedirect: '/error' }),
 function(req, res) {
   res.redirect('/success?username='+req.user.firstname)
+  var userId =req.user.id
   var  firstname =req.user.firstname
   var lastname= req.user.lastname
 console.log(firstname+lastname);
   router.get('/profile', function(req,res){
   
-    res.render("profile.ejs",{data :firstname ,data2: lastname})
+    res.render("profile.ejs",{data :firstname ,data2: lastname ,id: userId})
   // }).error(function(err){
   //   console.log(err);
   // })
+  router.post('/profile',function(req,res){
+    models.post.create({
+  user_id: userId,
+  fullname: req.body.fullname,
+  subject: req.body.subject,
+  blog: req.body.blog
+  
+    }).then(function(user){
+      console.log(user)
+    })
+    res.render('profile.ejs',{data :firstname ,data2: lastname ,id: userId})
+  })
+  
 });
 })
-
 
 
 router.get('/success', function (req, res) {
@@ -109,6 +126,14 @@ router.post("/sign-up", function (req, res) {
     })
     
     });
+
+
+  // router.get("/logout", function(req, res){
+  //   req.logout()
+    
+  //    res.redirect("/login")
+  //    // req.end();
+  //  });
 
 
 module.exports = router
