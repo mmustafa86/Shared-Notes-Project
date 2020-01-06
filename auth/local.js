@@ -16,7 +16,7 @@ app.use(passport.session());
 
 // var cookieParser = require('cookie-parser');
 var pbkdf2 = require('pbkdf2');
-var salt = "4213426A433E1F9C29368F36F44F1";
+var salt =process.env.SALT_KEY ;
 
 
 function encryptionPassword(password){
@@ -26,7 +26,6 @@ function encryptionPassword(password){
   var hash= key.toString('hex')
   return hash;
 }
-
 
 
 const LocalStrategy = require('passport-local').Strategy
@@ -97,8 +96,6 @@ passport.authenticate('local', { failureRedirect: '/error' }),
 function(req, res) {
   res.redirect('/success?username='+req.user.firstname)
 
-// console.log(firstname+lastname);
-  // router.redirect('/profile')
 })
 
 

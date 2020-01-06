@@ -29,6 +29,18 @@ models.post.findAll().then(function(user){
 
   
   })
+  router.post("/delete", function (req, res, next) {
+    var id =req.user.id
+    console.log(id)
+    models.post.destroy({where: { user_id: id}}).then((result) => {
+    console.log(result)
+    res.redirect('/')
+    });
+    
+  });
+  router.get('/delete',function(req,res){
+    res.redirect('/')
+  })
 
 
   router.get('/sign-up',function(req,res){

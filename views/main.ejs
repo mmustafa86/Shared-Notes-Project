@@ -86,7 +86,7 @@
 
                   <% names.forEach(function(name){ %>
 
-                  <div class=" card bg-light" style="max-width: 18rem;">
+                  <div class=" card bg-light m-2" style="max-width: 18rem;">
                     <div class="card-header">
                       <ul>
 
@@ -102,7 +102,9 @@
                       <h5 class="card-title"><%=name.subject%></h5>
 
                       <p class="card-text"><%=name.blog%></p>
-
+                      <form action="/delete" method="POST">
+                      <button role="button" href="/delete" class="btn btn-outline-primary">Delete</button>
+                    </form>
                     </div>
                   </div>
                   <% }) %>
