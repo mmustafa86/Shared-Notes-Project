@@ -38,6 +38,19 @@ models.post.findAll().then(function(user){
     });
     
   });
+
+
+
+
+
+router.put('/:id', function (req, res, next) {
+  models.post.findByPk(req.params.id).then((article) => {
+    return article.update(req.body);
+  }).then((article) => {
+    res.sed( article.id);
+  });
+});
+
   router.get('/delete',function(req,res){
     res.redirect('/')
   })
