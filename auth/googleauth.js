@@ -16,8 +16,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-var GOOGLE_CLIENT_ID ="382234308177-5gnbp943g9h6847g5ejh4bcjcklv0uue.apps.googleusercontent.com";
-var GOOGLE_CLIENT_SECRET="Ske7uzCJFY0gD5TRlic4YtjG"
+var GOOGLE_CLIENT_ID =process.env.GOOGLE_CLIENT_ID;
+var GOOGLE_CLIENT_SECRET=process.env.GOOGLE_CLIENT_SECRET;
 
 
 passport.serializeUser(function (user, done) {
