@@ -19,20 +19,20 @@ app.use(passport.session());
 
 router.get('/',function(req,res){
 
-models.post.findAll().then(function(user){
-     console.log(user);
-     user.forEach(element => {
+models.post.findAll().then(function(posts){
+     console.log(posts);
+     posts.forEach(element => {
        console.log(element.fullname + element.subject)
      });
-     res.render('main.ejs',{names: user})
+     res.render('main.ejs',{names: posts})
    })
 
   
   })
   router.post("/delete", function (req, res, next) {
-    var id =req.user.id
-    console.log(id)
-    models.post.destroy({where: { user_id: id}}).then((result) => {
+    var post =req.body.post_id
+    console.log(post)
+    models.post.destroy({where: { id: post}}).then((result) => {
     console.log(result)
     res.redirect('/')
     });

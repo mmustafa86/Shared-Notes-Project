@@ -103,6 +103,7 @@
 
                       <p class="card-text"><%=name.blog%></p>
                       <form action="/delete" method="POST">
+                        <input type="hidden" value="<%=name.id%>" name="post_id">
                         <button role="button" href="/delete" class="btn btn-outline-primary">Delete</button>
                       </form>
                     </div>
