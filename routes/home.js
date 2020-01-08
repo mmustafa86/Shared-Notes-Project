@@ -29,12 +29,13 @@ models.post.findAll().then(function(posts){
 
   
   })
-  router.post("/delete", function (req, res, next) {
-    var post =req.body.post_id
+  router.delete("/post/:id", function (req, res, next) {
+    console.log("deleting");
+    var post =req.params.id
     console.log(post)
-    models.post.destroy({where: { id: post}}).then((result) => {
+    models.post.destroy({where: { id: post, user_id: req.user.id}}).then((result) => {
     console.log(result)
-    res.redirect('/')
+    res.json('deleted')
     });
     
   });
@@ -47,7 +48,8 @@ router.put('/:id', function (req, res, next) {
   models.post.findByPk(req.params.id).then((article) => {
     return article.update(req.body);
   }).then((article) => {
-    res.sed( article.id);
+   console.log(article)
+    res.json('deleted')
   });
 });
 

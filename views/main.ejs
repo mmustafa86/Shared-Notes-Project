@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 <style>
@@ -102,22 +103,22 @@
                       <h5 class="card-title"><%=name.subject%></h5>
 
                       <p class="card-text"><%=name.blog%></p>
-                      <form action="/delete" method="POST">
+                      <button role="button" onclick="deleteButton(<%=name.id%>)" class="btn btn-outline-primary">Delete</button>
+                      <form action="/<%=name.id%>" method="PUT">
                         <input type="hidden" value="<%=name.id%>" name="post_id">
-                        <button role="button" href="/delete" class="btn btn-outline-primary">Delete</button>
+                        <button role="button" href="" class="btn btn-outline-primary">Edit</button>
                       </form>
                     </div>
+                    <% }) %>
                   </div>
-                  <% }) %>
+
+
+                  <br>
+                  <p> </p>
                 </div>
-
-
-                <br>
-                <p> </p>
               </div>
             </div>
           </div>
-        </div>
 
   </header>
   <!--Main Navigation-->
@@ -135,7 +136,17 @@
   <!--Main Layout-->
 
 
-
+<script>
+function deleteButton(id){
+  $.ajax({
+    url: "/post/"+ id,
+    method: "DELETE"
+  }).done(function (response){
+    console.log(response);
+    location.reload();
+  });
+}
+</script>
 
 
 </body>
