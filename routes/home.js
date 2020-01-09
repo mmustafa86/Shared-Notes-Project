@@ -49,9 +49,13 @@ router.put('/:id', function (req, res, next) {
     return article.update(req.body);
   }).then((article) => {
    console.log(article)
-    res.json('deleted')
+    res.render('edit.ejs')
   });
 });
+
+router.get('/edit',function(res,res){
+  res.render('edit.ejs')
+})
 
   router.get('/delete',function(req,res){
     res.redirect('/')
