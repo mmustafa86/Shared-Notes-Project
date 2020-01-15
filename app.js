@@ -4,7 +4,6 @@ const models= require('./models');
 const bodyParser= require("body-parser");
 const passport =require('passport');
 const session = require('express-session');
-const http = require('http');
 var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 require('dotenv').config();
