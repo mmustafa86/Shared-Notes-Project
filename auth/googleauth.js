@@ -45,10 +45,10 @@ passport.use(new GoogleStrategy({
   }
   ));
 
-  router.get('/profile', function(req,res){
+  // router.get('/profile', function(req,res){
   
-    res.render("profile.ejs")
-  })
+  //   res.render("profile.ejs")
+  // })
   router.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {

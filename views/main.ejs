@@ -51,7 +51,7 @@
   <header>
 
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-      <a class="navbar-brand" href="#"><strong>Fake Tweet</strong></a>
+      <a class="navbar-brand" href="/"><strong>MK POST NOTE+</strong></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -78,23 +78,21 @@
       <div class="full-bg-img">
         <div class="mask rgba-purple-light flex-center">
           <div class="container text-center white-text wow fadeInUp">
-            <h2>Fake Tweet Backend Project </h2>
+            <h2>Welcome to MK POST NOTE+ </h2>
             <br>
-            <h5>It will always stay visible on the top, even when you scroll down</h5>
+            <h5>You Can Share your Note On the  Wall </h5>
             <div class="container">
-              <div class="row ">
-                <div class="d-flex justify-content-between flex-wrap col-md-12 p-3 m-3">
 
-                  <% names.forEach(function(name){ %>
+                <% names.forEach(function(name){ %>
+              <div class="row ">
+                <div class=" col-md-12">
+
 
                   <div class=" card bg-light m-2" style="max-width: 18rem;">
                     <div class="card-header">
                       <ul>
-
-                        <p>
+                        <p id="name">
                           <%=name.fullname%>
-
-
                         </p>
 
                       </ul>
@@ -108,7 +106,7 @@
                         <a role="button" href="/edit" class="btn btn-outline-primary">Edit</a>
                     
                     </div>
-                    <% }) %>
+                    
                   </div>
 
 
@@ -116,6 +114,7 @@
                   <p> </p>
                 </div>
               </div>
+              <% }) %>
             </div>
           </div>
 
@@ -146,7 +145,11 @@ function deleteButton(id){
   });
 }
 </script>
-
+<style>
+#name{
+  text-align: center;
+}
+</style>
 
 </body>
 <%- include('footer'); -%>

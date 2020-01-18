@@ -100,6 +100,21 @@ function(req, res) {
 
 
 
+router.get('/success', function (req, res) {
+  console.log(req.user)
+  if(req.isAuthenticated()){
+    res.redirect("profile");
+
+  }else {
+    res.redirect('/sign-up')
+  }
+} );
+router.get("/profile",function(req ,res){
+  res.render("profile.ejs",{first: req.user.firstname ,last:req.user.lastname})
+})
+
+
+
 router.post('/profile',function(req,res){
   models.post.create({
 user_id: req.user.id,
@@ -110,35 +125,8 @@ blog: req.body.blog
   }).then(function(user){
     console.log(user)
   })
-  res.redirect('profile')
+  res.redirect('/')
 })
-
-router.get('/success', function (req, res) {
-  console.log(req.user)
-  if(req.isAuthenticated()){
-    res.redirect("/profile");
-
-  }else {
-    res.redirect('/sign-up')
-  }
-} );
-
-router.get('/error', function(req, res) {
-  
-  res.redirect("/login");
-} )
-
-
-router.get('/profile',function(req,res){
-  if(req.isAuthenticated()){
-  console.log(req.user);
-  res.render("profile.ejs",{data :req.user ,data2: req.user })
-  }else {
-    res.redirect('/sign-up')
-  }
-
-
-});
 
 
 router.get('/logout', function(req, res) {
