@@ -1,143 +1,101 @@
 <html>
 
 <head>
-  <title>Node Authentication</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Profile Authentication</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 
 </head>
-<style>
-  .view {
-    background: url("https://mdbootstrap.com/img/Photos/Others/img (40).jpg")no-repeat center center;
-    background-size: cover;
-  }
-
-  .navbar {
-    background-color: transparent;
-  }
-
-  .top-nav-collapse {
-    background-color: #4285F4;
-  }
-
-  @media only screen and (max-width: 768px) {
-    .navbar {
-      background-color: #4285F4;
-    }
-  }
-
-  html,
-  body,
-  header,
-  .view {
-    height: 100%;
-  }
-</style>
 
 <body>
-  <!-- <form method="get" action ="/login" >
-        <button method="get" action ="/login" >Login</button></form>
-        <form method="get" action ="/sign-up">
-            <button>sign-up</button></form> -->
-
-
-  <!-- 
-            <html lang="en" class="full-height"> -->
-
-  <!--Main Navigation-->
-  <header>
-
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-      <a class="navbar-brand" href="#"><strong>Fake Tweet</strong></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/sign-up">Signup</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/profile">Profile</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="view intro-2">
-      <div class="full-bg-img">
-        <div class="mask rgba-purple-light flex-center">
-          <div class="container text-center white-text wow fadeInUp">
-            <h2>Fake Tweet Backend Project </h2>
-            <br>
-            <h5>It will always stay visible on the top, even when you scroll down</h5>
-            <div class="container">
-              <div class="row ">
-                <div class="d-flex justify-content-between flex-wrap col-md-12 p-3 m-3">
-
-                  <% names.forEach(function(name){ %>
-
-                  <div class=" card bg-light m-2" style="max-width: 18rem;">
-                    <div class="card-header">
-                      <ul>
-
-                        <p>
-                          <%=name.fullname%>
-
-
-                        </p>
-
-                      </ul>
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title"><%=name.subject%></h5>
-
-                      <p class="card-text"><%=name.blog%></p>
-                      
-                      <form action="/<%=name.id%>" method="PUT">
-                        <input type="hidden" value="<%=name.id%>" name="post_id">
-                        <button role="button" href="" class="btn btn-outline-primary">Edit</button>
-                      </form>
-                    </div>
-                    <% }) %>
-                  </div>
-
-
-                  <br>
-                  <p> </p>
+<header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/login">Sign in</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/sign-up">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="/logout">Log Out</a>
+                          </li>
+                  </ul>
                 </div>
-              </div>
-            </div>
+              </nav>
+
+</header>
+
+
+<h1>Welcome </h1>
+
+
+<!-- Purple Header -->
+<div class="edge-header deep-purple"></div>
+
+<!-- Main Container -->
+<div class="container free-bird">
+  <div class="row">
+    <div class="col-md-8 col-lg-7 mx-auto float-none white z-depth-1 py-2 px-2">
+
+      <!--Naked Form-->
+      <div class="card-body">
+        <h2 class="h2-responsive"><strong>Edit Your Note </strong></h2>
+        <p class="pb-4">Below:</p>
+
+        <!--Body-->
+        <form action="/profile" method="post">
+          <!-- <input hidden for='user_id' name='user_id' type="text" id="form1" class="form-control"> -->
+          <h5 class="h5-responsive">Full Name </h5>
+          <!-- Basic textbox -->
+          <div class="md-form">
+            <input for='fullname' name='fullname'type="text" id="form1" class="form-control">
+            <label  class=""></label>
+          </div>
+  
+          <!--Subject-->
+          <h5 class="h5-responsive">Subject</h5>
+          <div class="md-form">
+            <!-- <i class="fas fa-envelope prefix"></i> -->
+            <input for="subject" name="subject" type="text" id="form9" class="form-control validate">
+            <!-- <label for="form9" data-error="wrong" data-success="right">Your email</label> -->
           </div>
 
-  </header>
-  <!--Main Navigation-->
+          <!--Textarea with icon-->
+          <h5 class="h5-responsive">Note Area</h5>
+          <div class="md-form">
+            <i class="fas fa-pencil-alt prefix"></i>
+            <textarea for="blog" name="blog" type="text" id="form7" class="md-textarea form-control" rows="4"></textarea>
+            <!-- <label for="form7">Textarea</label> -->
+          </div>
 
-  <!--Main Layout-->
-  <main class="text-center py-5">
+          <div class="text-xs-left">
+            <button class="btn btn-primary">Post</button>
+          </div>
+        </form>
 
+        <div class="my-2">
+          <p style="font-weight:300;font-size:0.75rem"></p>
+        </div>
 
+      </div>
+      <!--Naked Form-->
 
     </div>
-    </div>
-    </div>
-
-  </main>
-  <!--Main Layout-->
-
-
+  </div>
+</div>
+<!-- /.Main Container -->
 
 
 </body>
 <%- include('footer'); -%>
-
 </html>
