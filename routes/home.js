@@ -40,22 +40,50 @@ models.post.findAll().then(function(posts){
     
   });
 
-
-
-
-
-router.put('/:id', function (req, res, next) {
-  models.post.findByPk(req.params.id).then((article) => {
-    return article.update(req.body);
-  }).then((article) => {
-   console.log(article)
-    res.render('edit.ejs')
+  router.get('/:id/edit', function (req, res, next){
+    console.log(req.params.id) 
+    if (req.isAuthenticated()){
+    models.post.findByPk(req.params.id).then((article) => {
+      res.render('edit.ejs', { article: article });
+    });
+  } else {
+    res.redirect('/');
+  }
   });
-});
 
-router.get('/edit',function(res,res){
-  res.render('edit.ejs')
+router.post('/update',function(req,res){
+console.log(req.body)
+
+    models.post.update({
+
+  fullname: req.body.fullname,
+  subject: req.body.subject,
+  blog: req.body.blog
+    },{
+where: { 
+  id: req.body.id
+
+}
+  }).then(function(result){
+res.redirect('/');
+  })
 })
+
+
+
+
+
+
+
+// router.get('/edit',function(req,res){
+//   if (req.isAuthenticated()){
+//     res.render('edit.ejs')
+//   } else {
+//     res.redirect('/');
+//   }
+//   })
+
+
 
   router.get('/delete',function(req,res){
     res.redirect('/')

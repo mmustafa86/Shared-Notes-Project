@@ -53,12 +53,13 @@
         <p class="pb-4">Below:</p>
 
         <!--Body-->
-        <form action="/profile" method="post">
+        <form action="/update" method="post">
+            <input type="hidden" value="<%=article.id%>" name="id">
           <!-- <input hidden for='user_id' name='user_id' type="text" id="form1" class="form-control"> -->
           <h5 class="h5-responsive">Full Name </h5>
           <!-- Basic textbox -->
           <div class="md-form">
-            <input for='fullname' name='fullname'type="text" id="form1" class="form-control">
+            <input for='fullname' name='fullname'type="text" id="form1" class="form-control"value="<%=article.fullname%>">
             <label  class=""></label>
           </div>
   
@@ -66,7 +67,7 @@
           <h5 class="h5-responsive">Subject</h5>
           <div class="md-form">
             <!-- <i class="fas fa-envelope prefix"></i> -->
-            <input for="subject" name="subject" type="text" id="form9" class="form-control validate">
+            <input for="subject" name="subject" type="text" id="form9" class="form-control validate" value="<%=article.subject%>" >
             <!-- <label for="form9" data-error="wrong" data-success="right">Your email</label> -->
           </div>
 
@@ -74,12 +75,12 @@
           <h5 class="h5-responsive">Note Area</h5>
           <div class="md-form">
             <i class="fas fa-pencil-alt prefix"></i>
-            <textarea for="blog" name="blog" type="text" id="form7" class="md-textarea form-control" rows="4"></textarea>
+            <textarea for="blog" name="blog" type="text" id="form7" class="md-textarea form-control" rows="4" value="<%=article.blog%>"><%=article.blog%></textarea>
             <!-- <label for="form7">Textarea</label> -->
           </div>
 
           <div class="text-xs-left">
-            <button class="btn btn-primary">Post</button>
+            <button class="btn btn-primary">Update</button>
           </div>
         </form>
 
