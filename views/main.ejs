@@ -59,17 +59,17 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/main">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/sign-up">Signup</a>
-          </li>
+       
+         
           <li class="nav-item">
             <a class="nav-link" href="/profile">Post You Note</a>
           </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+    </ul>
         </ul>
       </div>
     </nav>
@@ -78,13 +78,14 @@
       <div class="full-bg-img">
         <div class="mask rgba-purple-light flex-center">
           <div class="container text-center white-text wow fadeInUp">
-            <h2>Welcome to MK POST NOTE+ </h2>
+            <h2>Welcome Back <%=name%> </h2>
             <br>
             <h5>You Can Share your Note On the  Wall </h5>
             <div class="container">
 
-                <% names.forEach(function(name){ %>
+               
               <div class="row ">
+                 <% names.forEach(function(name){ %>
                 <div class=" col-md-12">
 
 
@@ -98,13 +99,15 @@
                       </ul>
                     </div>
                     <div class="card-body">
-                      <h5 class="card-title"><%=name.subject%></h5>
+                      <h5 class="card-title"><%=name.subject%></h5> 
 
-                      <p class="card-text"><%=name.blog%></p>
+                      <p class="card-text"><%=name.blog%> </p>
+                      <% if (user ===name.user_id) { %>
+
                       <button role="button" onclick="deleteButton(<%=name.id%>)" class="btn btn-outline-primary">Delete</button>
                     
                         <a role="button" href="/<%=name.id%>/edit" class="btn btn-outline-primary">Edit</a>
-                    
+                        <% } %>
                     </div>
                     
                   </div>

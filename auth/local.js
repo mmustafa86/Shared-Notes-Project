@@ -103,7 +103,7 @@ function(req, res) {
 router.get('/success', function (req, res) {
   console.log(req.user)
   if(req.isAuthenticated()){
-    res.redirect("profile");
+    res.redirect("/main");
 
   }else {
     res.redirect('/sign-up')
