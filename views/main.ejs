@@ -9,152 +9,150 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
-<style>
-  .view {
-    background: url("https://mdbootstrap.com/img/Photos/Others/img (40).jpg")no-repeat center center;
-    background-size: cover;
-  }
 
-  .navbar {
-    background-color: transparent;
-  }
+<!--Main Navigation-->
+<header>
 
-  .top-nav-collapse {
-    background-color: #4285F4;
-  }
+  <nav class="navbar navbar-expand-lg navbar-light ">
+    <a class="navbar-brand" href="/">MK NOTE+</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="/main">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/profile">Post You Note</a>
+        <a class="nav-item nav-link" href="/logout">Log Out</a>
 
-  @media only screen and (max-width: 768px) {
-    .navbar {
-      background-color: #4285F4;
-    }
-  }
+      </div>
+    </div>
+  </nav>
 
-  html,
-  body,
-  header,
-  .view {
-    height: 100%;
-  }
-</style>
+</header>
 
 <body>
-  <!-- <form method="get" action ="/login" >
-        <button method="get" action ="/login" >Login</button></form>
-        <form method="get" action ="/sign-up">
-            <button>sign-up</button></form> -->
+  <div id="welcome">
+    <h2>Welcome Back <%=name%> </h2>
+    <br>
+  </div>
+
+  <div id="welcome">
+    <h5>You Can Share your Note On the Wall </h5>
+  </div>
+  <!-- cards  -->
+  <div class="container">
+<div class="row ">
+  <div class="col-sm-3 col-md-6">
+      <% names.forEach(function(name){ %>
+      <div class=" col-md-12">
 
 
-  <!-- 
-            <html lang="en" class="full-height"> -->
+        <div class=" card bg-light m-2" style="max-width: 18rem;">
+          <div class="card-header">
+            <ul>
+              <p id="name">
+                <%=name.fullname%>
+              </p>
 
-  <!--Main Navigation-->
-  <header>
-
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-      <a class="navbar-brand" href="/"><strong>MK POST NOTE+</strong></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/main">Home <span class="sr-only">(current)</span></a>
-          </li>
-       
-         
-          <li class="nav-item">
-            <a class="nav-link" href="/profile">Post You Note</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="/logout">Log Out</a>
-            </li>
-    </ul>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="view intro-2">
-      <div class="full-bg-img">
-        <div class="mask rgba-purple-light flex-center">
-          <div class="container text-center white-text wow fadeInUp">
-            <h2>Welcome Back <%=name%> </h2>
-            <br>
-            <h5>You Can Share your Note On the  Wall </h5>
-            <div class="container">
-
-               
-              <div class="row ">
-                 <% names.forEach(function(name){ %>
-                <div class=" col-md-12">
-
-
-                  <div class=" card bg-light m-2" style="max-width: 18rem;">
-                    <div class="card-header">
-                      <ul>
-                        <p id="name">
-                          <%=name.fullname%>
-                        </p>
-
-                      </ul>
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title"><%=name.subject%></h5> 
-
-                      <p class="card-text"><%=name.blog%> </p>
-                      <% if (user ===name.user_id) { %>
-
-                      <button role="button" onclick="deleteButton(<%=name.id%>)" class="btn btn-outline-primary">Delete</button>
-                    
-                        <a role="button" href="/<%=name.id%>/edit" class="btn btn-outline-primary">Edit</a>
-                        <% } %>
-                    </div>
-                    
-                  </div>
-
-
-                  <br>
-                  <p> </p>
-                </div>
-              </div>
-              <% }) %>
-            </div>
+            </ul>
           </div>
+          <div class="card-body">
+            <h5 class="card-title"><%=name.subject%></h5>
 
-  </header>
-  <!--Main Navigation-->
+            <p class="card-text"><%=name.blog%> </p>
+            <% if (user ===name.user_id) { %>
 
-  <!--Main Layout-->
-  <main class="text-center py-5">
+            <button role="button" onclick="deleteButton(<%=name.id%>)" class="btn btn-outline-primary">Delete</button>
 
-
-
+            <a role="button" href="/<%=name.id%>/edit" class="btn btn-outline-primary">Edit</a>
+            <% } %>
+          </div>
+</div>
+        
     </div>
-    </div>
-    </div>
+    <% }) %>
+  </div>
+  </div>
+</div>
 
-  </main>
-  <!--Main Layout-->
+</body>
 
 
 <script>
-function deleteButton(id){
-  $.ajax({
-    url: "/post/"+ id,
-    method: "DELETE"
-  }).done(function (response){
-    console.log(response);
-    location.reload();
-  });
-}
+  function deleteButton(id) {
+    $.ajax({
+      url: "/post/" + id,
+      method: "DELETE"
+    }).done(function (response) {
+      console.log(response);
+      location.reload();
+    });
+  }
 </script>
 <style>
-#name{
-  text-align: center;
-}
+  body {
+    background: url("https://mdbootstrap.com/img/Photos/Others/img (40).jpg")no-repeat center center;
+
+  }
+
+  #welcome {
+    display: flex;
+    justify-content: center;
+  }
+
+  #name {
+    text-align: center;
+  }
 </style>
 
-</body>
-<%- include('footer'); -%>
+  <!-- footer -->
+  <div id="footer">
+ <!-- Footer -->
+<footer class="page-footer font-small teal pt-4">
 
+    <!-- Footer Text -->
+    <div class="container-fluid text-center text-md-left">
+  
+      <!-- Grid row -->
+      <div class="row">
+  
+        <!-- Grid column -->
+        <div class="col-md-6 mt-md-0 mt-3">
+  
+          <!-- Content -->
+          <h5 class="text-uppercase font-weight-bold"></h5>
+          <p></p>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="clearfix w-100 d-md-none pb-3">
+  
+        <!-- Grid column -->
+        <div class="col-md-6 mb-md-0 mb-3">
+  
+          <!-- Content -->
+          <h5 class="text-uppercase font-weight-bold"></h5>
+          <p></p>
+  
+        </div>
+        <!-- Grid column -->
+  
+      </div>
+      <!-- Grid row -->
+  
+    </div>
+    <!-- Footer Text -->
+  
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href="/"> Home Page </a>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
+
+</div>
 </html>
