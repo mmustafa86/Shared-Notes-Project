@@ -16,7 +16,7 @@ app.use(passport.session());
 
 // var cookieParser = require('cookie-parser');
 var pbkdf2 = require('pbkdf2');
-var salt =process.env.SALT_KEY ;
+var salt ="4213426A433E1F9C29368F36F44F1" ;
 
 
 function encryptionPassword(password){
