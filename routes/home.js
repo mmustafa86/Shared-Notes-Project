@@ -92,7 +92,7 @@ where: {
 
 }
   }).then(function(result){
-res.redirect('/');
+res.redirect('/main');
   })
 })
 

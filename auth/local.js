@@ -125,7 +125,7 @@ blog: req.body.blog
   }).then(function(user){
     console.log(user)
   })
-  res.redirect('/')
+  res.redirect('/main')
 })
 
 

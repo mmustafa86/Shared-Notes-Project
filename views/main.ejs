@@ -43,39 +43,23 @@
   <!-- cards  -->
   <div class="container">
 <div class="row ">
-  <div class="col-sm-3 col-md-6">
-      <% names.forEach(function(name){ %>
-      <div class=" col-md-12">
 
+  <% names.forEach(function(name){ %>
+  <div class="card  card col-lg-3 col-sm-6 mb-4 text-white bg-secondary mb-3" style="max-width: 18rem;">
+      <div class="card-header"><%=name.subject%></div>
+      <div class="card-body">
+        <h5 class="card-title"><%=name.subject%></h5>
+        <p class="card-text"><%=name.blog%></p>
+        <% if (user ===name.user_id) { %>
+        <button role="button" onclick="deleteButton(<%=name.id%>)" class="btn btn-outline-warning">Delete</button>
 
-        <div class=" card bg-light m-2" style="max-width: 18rem;">
-          <div class="card-header">
-            <ul>
-              <p id="name">
-                <%=name.fullname%>
-              </p>
-
-            </ul>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title"><%=name.subject%></h5>
-
-            <p class="card-text"><%=name.blog%> </p>
-            <% if (user ===name.user_id) { %>
-
-            <button role="button" onclick="deleteButton(<%=name.id%>)" class="btn btn-outline-primary">Delete</button>
-
-            <a role="button" href="/<%=name.id%>/edit" class="btn btn-outline-primary">Edit</a>
-            <% } %>
-          </div>
+        <a role="button" href="/<%=name.id%>/edit" class="btn btn-outline-dark">Edit</a>
+        <% } %>
+      </div>
 </div>
-        
-    </div>
-    <% }) %>
-  </div>
-  </div>
+<% }) %>
 </div>
-
+</div>
 </body>
 
 
@@ -103,11 +87,22 @@
 
   #name {
     text-align: center;
+    
   }
+  .row{
+    margin-bottom: 210px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .card{
+    margin: 10px
+  }
+ 
 </style>
 
   <!-- footer -->
-  <div id="footer">
+
  <!-- Footer -->
 <footer class="page-footer font-small teal pt-4">
 
@@ -154,5 +149,5 @@
   </footer>
   <!-- Footer -->
 
-</div>
+
 </html>
