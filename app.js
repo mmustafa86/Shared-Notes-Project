@@ -34,8 +34,11 @@ app.use(google)
 app.use(passports)
 
 
-  models.sequelize.sync().then(function(){
-    app.listen(3030, function(){
-      console.log('server listening on port 3030');
-  });
-  })
+  // models.sequelize.sync().then(function(){
+  //   app.listen(3030, function(){
+  //     console.log('server listening on port 3030');
+  // });
+  // })
+  app.listen(4040, function(){
+        console.log('server listening on port 4040');
+    });
