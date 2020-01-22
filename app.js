@@ -36,6 +36,6 @@ app.use(passports)
 
   models.sequelize.sync().then(function(){
     app.listen(3030, function(){
-      console.log('server listening on port 3000');
+      console.log('server listening on port 3030');
   });
   })
