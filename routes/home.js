@@ -109,7 +109,7 @@ function isLoggedIn(req, res, next) {
     res.redirect('/')
   })
 
-
+//singup route
   router.get('/sign-up',function(req,res){
     res.render('signup.ejs')
   })
