@@ -28,12 +28,15 @@
               </nav>
 
 </header>
-
-<div id="welcome ">
-<h1>Welcome  </h1>
-
-<h1><%=first%>  <%=last%></h1>
-</div>
+<div class="shadow-lg p-3 mb-5 bg-white rounded">
+  <div class="media border p-3">
+      <img src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="<%=first%>  <%=last%>." class="mr-3 mt-3 rounded-circle" style="width:60px;">
+      <div class="media-body">
+        <h4>Welcome</h4>
+        <h5><%=first%>  <%=last%>.</h5>
+      </div>
+    </div>
+    </div>
 <!-- Purple Header -->
 <div class="edge-header deep-purple"></div>
 
@@ -92,7 +95,7 @@
 <style>
   #welcome{
     display: flex;
-    
+
   }
 </style>
 

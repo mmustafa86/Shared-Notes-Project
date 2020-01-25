@@ -31,9 +31,15 @@
 </header>
 
 
-<h1>Welcome </h1>
-
-
+<div class="shadow-lg p-3 mb-5 bg-white rounded">
+<div class="media border p-3">
+        <img src="https://www.w3schools.com/bootstrap4/img_avatar1.png" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+        <div class="media-body">
+          <h4>Welcome</h4>
+          <h5><%=article.fullname%></h5>
+        </div>
+      </div>
+    </div>
 <!-- Purple Header -->
 <div class="edge-header deep-purple"></div>
 
@@ -48,7 +54,7 @@
         <p class="pb-4">Below:</p>
 
         <!--Body-->
-        <form action="/update" method="post">
+        <form action="/update" method="post"></form>
             <input type="hidden" value="<%=article.id%>" name="id">
           <!-- <input hidden for='user_id' name='user_id' type="text" id="form1" class="form-control"> -->
           <h5 class="h5-responsive">Full Name </h5>
